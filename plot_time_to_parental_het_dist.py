@@ -6,9 +6,6 @@ import re
 import scipy.stats
 import numpy as np
 
-# REMOVED: Global constant KDE_SMOOTHNESS_FACTOR has been removed.
-# Smoothness is now defined per-dataset in the configuration.
-
 # --- REVISED FUNCTION: INDIVIDUAL SMOOTHNESS, NO CI, NO LEGEND ---
 def plot_crossing_time_distribution_multiple(
     data_list: list,
@@ -282,4 +279,5 @@ if __name__ == "__main__":
         data_list=plotting_data_list,
         ne_value=N_E_VALUE,
         save_filename=COMBINED_PLOT_OUTPUT
+
     )
