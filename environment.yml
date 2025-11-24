@@ -1,4 +1,4 @@
-name: hybrid_inheritance_sim
+name: my_sim_env
 channels:
   - defaults
   - https://repo.anaconda.com/pkgs/main
@@ -11,3 +11,4 @@ dependencies:
   - matplotlib
   - jupyter
 prefix: C:\Users\sophi\anaconda3\envs\hybrid_inheritance_sim
+
