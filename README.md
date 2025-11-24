@@ -32,22 +32,31 @@ Git: For cloning this repository.
     All necessary Python libraries and their exact versions are listed in the `requirements.txt` file. With the `my_sim_env` Conda environment, install these dependencies.
 
 ### How to Run the Simulation
-1.  Launch chosen interface and open the script:
+1.  Launch chosen interface and open the script, if using a HPCC use the 'run_sim_beetle.sh' script. 
     With the `my_sim_env` Conda environment active.
 2.  Execute the script with the following parameters:
-3.  
+   SIM_COMMAND_ARRAY=(
+        "$VENV_PYTHON_EXE" -u "$SIM_SCRIPT" 
+        --output_dir "$REPLICATE_DIR" --replicate_id "$i" 
+        --file "/mnt/nfs2/bioenv/sg802/hybrid_sim_project/beetle_input.csv" 
+        -npa 100 -npb 100 -HG 3000 -nc 1 -oh -gmap 
+        -cd '{"0": 1.0}' -tp
+    ) -> this particular command is for the no recombiantion simulation.
+3. For simulating other levels of recombination the -cd flag must be adjusted. 
+4.  For post-simualtion analysis, run the 'match_hybrid_to_parent_het.py' script. To find the simualted hybrid generation with the closest heterozygosity score to its ancestral parent popualtion.
 
 ## Project Structure
 `sim_v2.py`: The main script containing all Python code for simulation logic, data processing, and plotting functions.
 `output_data/results`: This directory is automatically created by the script if it doesn't exist. It stores all generated data files and plots.
 
 ## Outputs
-Upon successful execution, the script generates the following output files within the `output_data/` directory and its subfolders:
+Upon execution, the script generates the following output files within the `output_data/results` directory and its subfolders:
 
 CSV Data Files:
     `locus_level_df_.csv`: Detailed genetic information for each locus.
     `chromatid_recomb_df_.csv`: Data logs detailing recombination events per chromatid.
      `HI_and_HET_df.csv`: Data logs detailing Hybrid Index and Heterozygosity events per individual.
+     'combined_matching_generations.csv': Data logs the closest hybrid generation to match its parental population level of heterozygosity for each replicate.
     
 PNG Plot Image:
     `triangle_plot.png`: Plot showing mean values with individual data points (optional) subtly visible in the background.
@@ -59,7 +68,10 @@ The simulation is highly adaptable. Parameters can be modified by adjusting vari
 * `POP_SIZE`: Controls the number of individuals in each generation.
 * `NUM_HYBRID_GENERATIONS`: Specifies the number of hybrid generations to simulate.
 * `CROSS_DIST`: Adjusts the probability of a recombination event between adjacent loci.
-
+* `REPLICATE_ID`: Sets the number replicates of the given command line parameters to run.
+* `OUTPUT_HI_HET`: Sets the output for the `HI_and_HET_df.csv` required for plotting.
+* `TRIANGLE_PLOT`: Sets the output for the `triangle_plot.png` required for visualisation.
 
 ## Contact
 For any questions, suggestions, or issues, please open an issue on GitHub.
+
