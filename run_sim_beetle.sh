@@ -32,7 +32,7 @@ SIM_SCRIPT="/mnt/nfs2/bioenv/sg802/hybrid_sim_project/scripts/sim_v2.py"
 ANALYSIS_SCRIPT="/mnt/nfs2/bioenv/sg802/hybrid_sim_project/scripts/python_helper_scripts/match_hybrid_to_parent_het.py"
 PLOTTING_SCRIPT="/mnt/nfs2/bioenv/sg802/hybrid_sim_project/scripts/python_helper_scripts/visualisations/triangle_plot_grey_line.py"
 
-BASE_OUTPUT_DIR="/mnt/nfs2/bioenv/sg802/hybrid_sim_project/simulation_outputs_no_recombination_50/"
+BASE_OUTPUT_DIR="/mnt/nfs2/bioenv/sg802/hybrid_sim_project/simualtion_outputs"
 ANALYSIS_OUTPUT_FILE="${BASE_OUTPUT_DIR}/combined_matching_generations_no_recombination.csv"
 
 
@@ -102,4 +102,5 @@ for ((i=$1; i<=$2; i++)); do
 done
 
 echo " "
+
 echo "Workflow for replicate range $1 to $2 complete."
