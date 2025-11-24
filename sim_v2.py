@@ -6,7 +6,6 @@ import os
 import json
 import networkx as nx
 import matplotlib.pyplot as plt
-#import multiprocessing
 import ast
 import time
 import re
@@ -267,7 +266,6 @@ class RecombinationSimulator:
 
         return offspring, blocks_data, junctions_data
     
-    # RENAME: create_pure_founder -> create_pure_immigrant
     def create_pure_immigrant(self, individual_id, generation, pop_label): 
         """
         Creates a new homozygous individual (immigrant) with a pure genotype 
@@ -308,7 +306,6 @@ class RecombinationSimulator:
                 immigrant_haplotypes[chrom] = haplotypes_chrom
                 
             else:
-                # --- OLD LOGIC: Fallback to fixed 0/1 alleles (for cases with no input file) ---
                 fixed_allele = 0 if pop_label == 'PA' else 1
                 
                 # Create pure haplotype arrays using NumPy
@@ -787,11 +784,7 @@ def simulate_generations(
     """
     Runs the simulation for the specified generations based on the crossing plan.
     """
-    import os
-    import csv
-    import numpy as np
-    import random
-    
+
     # Pre-calculate the index where immigration should start
     try:
         # Find the index of the start label in the list of all generation labels from the crossing plan
@@ -853,8 +846,6 @@ def simulate_generations(
 
         if verbose:
             print(f"\n Simulating Generation {gen_label} ({cross_type}) ")
-
-        # ... (Parent Selection Logic remains the same) ...
         
         # PARENT SELECTION LOGIC
         parent1_pop = populations_dict.get(parent1_label)
@@ -1756,7 +1747,7 @@ Input as a string dictionary, e.g., '{"1": 0.8, "2": 0.2}'. (default: '{"1": 1.0
     all_hi_het_data.update(initial_hi_het_data)
     all_hi_het_data = {**initial_hi_het_data, **hi_het_data}
 
-    # New: Modify the output name to include the replicate ID
+    # Modify the output name to include the replicate ID
     original_output_name = args.output_name
     args.output_name = f"{original_output_name}_rep_{args.replicate_id}"
 
@@ -1766,4 +1757,5 @@ Input as a string dictionary, e.g., '{"1": 0.8, "2": 0.2}'. (default: '{"1": 1.0
     # New: Reset the output name for the next iteration
     args.output_name = original_output_name
     
+
     print(f"Finished Simulation Replicate {args.replicate_id}")
